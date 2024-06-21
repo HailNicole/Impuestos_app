@@ -1,0 +1,45 @@
+<div class="container">
+    <form (ngSubmit)="Enviar()" method="post">
+        <div class="form-group">
+            <h1 class="text-center text-primary">Calcular el impuesto a la renta</h1>
+            <div class="input-group">
+                <label for="cedula" class="form-label">Cedula</label>
+                <input type="text" class="form-control" id="cedula" name="cedula" [(ngModel)]="cedula" />
+            </div>
+            <div class="input-group">
+                <label for="sa" class="form-label">Sueldo Anual</label>
+                <input type="number" class="form-control" id="sa" name="sa" [(ngModel)]="sa" />
+            </div>
+            <div class="input-group">
+                <label for="salud" class="form-label">Salud</label>
+                <input type="number" class="form-control" id="salud" name="salud" [(ngModel)]="salud" (change)="validar_ingresos()"/>
+            </div>
+            <div class="input-group">
+                <label for="educacion" class="form-label">Educacion</label>
+                <input type="number" class="form-control" id="educacion" name="educacion" [(ngModel)]="educacion" (change)="validar_ingresos()"/>
+            </div>
+            <div class="input-group">
+                <label for="vestimenta" class="form-label">Vestimenta</label>
+                <input type="number" class="form-control" id="vestimenta" name="vestimenta" [(ngModel)]="vestimenta" (change)="validar_ingresos()"/>
+            </div>
+            <div class="input-group">
+                <label for="vivienda" class="form-label">Vivienda</label>
+                <input type="number" class="form-control" id="vivienda" name="vivienda" [(ngModel)]="vivienda" (change)="validar_ingresos()"/>
+            </div>
+            <div class="input-group">
+                <label for="alimentacion" class="form-label">Alimentacion</label>
+                <input type="number" class="form-control" id="alimentacion" name="alimentacion" [(ngModel)]="alimentacion" (change)="validar_ingresos()"/>
+            </div>
+            <button type="submit">Calcular Gastos</button>
+        </div>
+    </form>
+    <div class="result-container">
+        <h2 *ngIf="cedula" class="text-center">Cedula: {{ cedula }}</h2>
+        <h2 *ngIf="flag" class="text-center">Se ha excedido el límite de gastos personales</h2>
+        <h2 *ngIf="gastos !== 0 && !flag" class="text-center">Total de Gastos: {{ mostrar_resultado().gastos }}</h2>
+        <h2 *ngIf="base_imponible !== 0 && !flag" class="text-center">Base Imponible: {{ mostrar_resultado().base_imponible }}</h2>
+        <h2 *ngIf="excedente !== 0 && !flag" class="text-center">Excedente: {{ mostrar_resultado().excedente }}</h2>
+        <h2 *ngIf="porcentaje_excedente !== 0 && !flag" class="text-center">Porcentaje Excedente: {{ mostrar_resultado().porcentaje_excedente }}</h2>
+        <h2 *ngIf="ir !== 0 && !flag" class="text-center">Impuesto a la Renta: {{ mostrar_resultado().ir }}</h2>
+    </div>
+</div>

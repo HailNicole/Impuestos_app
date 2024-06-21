@@ -1,0 +1,50 @@
+<div class="container">
+  <form (ngSubmit)="Enviar()" method="post">
+      <div class="form-group">
+        <h1 class="text-center text-primary">Facturas Gastos</h1>
+        <div class="input-group">
+          <label for="ruc" class="form-label">RUC</label>
+          <input type="text" class="form-control" id="ruc" name="ruc" [(ngModel)]="ruc" required>
+        </div>
+        <div class="input-group">
+          <label for="valor" class="form-label">Valor de factura</label>
+          <input type="number" class="form-control" id="valor" name="valor" [(ngModel)]="valor" required>
+        </div>
+        <div class="input-group">
+          <label for="gasto" class="form-label">Gasto</label>
+          <select class="form-select" aria-label="gasto" name="gasto" [(ngModel)]="gasto" required>
+            <option disabled selected>Escoja el tipo de gasto</option>
+            <option value="Salud">Salud</option>
+            <option value="Vivienda">Vivienda</option>
+            <option value="Educacion">Educación</option>
+            <option value="Ninguno">Ninguno</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+      </div>
+    </form>
+  </div>
+
+<div class="container">
+  REPORTE DE PAGO IMPUESTO RENTA
+  <div>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Tipo de Gasto</th>
+              <th scope="col">RUC</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let gasto of gastos">
+                  <th scope="row">{{gasto.id}}</th>
+                  <td>{{gasto.tipo}}</td>
+                  <td>{{gasto.ruc}}</td>
+                  <td>{{gasto.valor}}</td>
+              </tr>
+          </tbody>
+        </table>
+  </div>
+</div>

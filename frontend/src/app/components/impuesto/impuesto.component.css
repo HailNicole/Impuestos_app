@@ -1,0 +1,38 @@
+.container{
+    text-align: center;
+}
+
+.form-group{
+    margin: auto;
+    padding: 10px;  
+    margin:auto;
+	padding:20px 50px 20px 50px;
+	display:inline-block;
+	border:solid .2rem black;
+}
+
+.input-group{
+    margin: 10px;
+    width:100%;
+}
+
+.input-group .form-label{
+    padding-right: 16px;
+}
+
+input[type="number"],input[type="text"] {
+    border: 1px solid darkblue;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer; 
+  }
+
+.result-container{
+    text-align: left;
+    margin: auto;
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid chocolate;
+    width: 50%;
+}

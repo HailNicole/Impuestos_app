@@ -1,0 +1,62 @@
+<div class="container">
+    REPORTE DE PAGO IMPUESTO RENTA
+    <div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tipo de Gasto</th>
+                <th scope="col">RUC</th>
+                <th scope="col">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gasto of gastos">
+                    <th scope="row">{{gasto.id}}</th>
+                    <td>{{gasto.tipo}}</td>
+                    <td>{{gasto.ruc}}</td>
+                    <td>{{gasto.valor}}</td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<!--<div class="container">
+  REPORTE COMPLETO DE PAGO IMPUESTO RENTA
+  <div>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Cedula</th>
+              <th scope="col">Salario</th>
+              <th scope="col">Salud</th>
+              <th scope="col">Educacion</th>
+              <th scope="col">Vestimenta</th>
+              <th scope="col">Vivienda</th>
+              <th scope="col">Alimentacion</th>
+              <th scope="col">Total Gastos</th>
+              <th scope="col">Base Imponible</th>
+              <th scope="col">Excedente</th>
+              <th scope="col">Porcentaje Excedente</th>
+              <th scope="col">Total de Impuesto a la Renta</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let impuesto of datos">
+                  <th scope="row">{{impuesto.cedula}}</th>
+                  <td>{{impuesto.sueldo}}</td>
+                  <td>{{impuesto.salud}}</td>
+                  <td>{{impuesto.educacion}}</td>
+                  <td>{{impuesto.vestimenta}}</td>
+                  <td>{{impuesto.vivienda}}</td>
+                  <td>{{impuesto.alimentacion}}</td>
+                  <td>{{impuesto.tot_gastos}}</td>
+                  <td>{{impuesto.base_imponible}}</td>
+                  <td>{{impuesto.excedente}}</td>
+                  <td>{{impuesto.por_excedente}}</td>
+                  <td>{{impuesto.ir_total}}</td>
+              </tr>
+          </tbody>
+        </table>
+  </div>
+</div>-->
