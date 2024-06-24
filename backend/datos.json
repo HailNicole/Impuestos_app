@@ -28,5 +28,11 @@
     "tipo": "Educacion",
     "ruc": "12343",
     "valor": 12
+  },
+  {
+    "id": 6,
+    "tipo": "Salud",
+    "ruc": "1245456",
+    "valor": 65
   }
 ]
