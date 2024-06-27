@@ -1,0 +1,32 @@
+[
+    {
+        "Tipo":"Vivienda",
+        "Descripcion":"Corresponde a los desembolsos destinados a urbanizacion, la construccion y remodelacion de viviendas para el publico general",
+        "gasto":"500",
+        "imagen":"../assets/vivienda.jpg"
+    },
+    {
+        "Tipo":"Salud",
+        "Descripcion":"Factores socioeconómicos y ambientales, como el acceso a agua limpia, la contaminación del aire y la exposición a toxinas, también afectan significativamente la salud de las poblaciones.",
+        "gasto":"1500",
+        "imagen":"../assets/salud.jpg"
+    },
+    {
+        "Tipo":"Vestimenta",
+        "Descripcion":"Consideraciones éticas y ambientales, como la moda sostenible y el comercio justo, están ganando importancia en la industria textil global.",
+        "gasto":"1000",
+        "imagen":"../assets/vestimenta.jpg"
+    },
+    {
+        "Tipo":"Educacion",
+        "Descripcion":"Corresponde a los desembolsos destinados a urbanizacion, la construccion y remodelacion de viviendas para el publico general",
+        "gasto":"2500",
+        "imagen":"../assets/educacion.jpg"
+    },
+    {
+        "Tipo":"Alimentacion",
+        "Descripcion":"La alimentación equilibrada incluye una variedad de alimentos que proporcionan nutrientes esenciales como proteínas, carbohidratos, grasas, vitaminas y minerales.",
+        "gasto":"500",
+        "imagen":"../assets/alimentacion.jpg"
+    }
+]

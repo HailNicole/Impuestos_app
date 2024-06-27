@@ -60,3 +60,25 @@
         </table>
   </div>
 </div>
+
+<div class="container">
+  REPORTE USUARIOS
+  <div>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">USERNAME</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users">
+                  <th scope="row">{{user.id}}</th>
+                  <td>{{user.name}}</td>
+                  <td>{{user.username}}</td>
+              </tr>
+          </tbody>
+        </table>
+  </div>
+</div>
