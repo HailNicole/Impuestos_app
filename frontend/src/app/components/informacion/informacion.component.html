@@ -2,7 +2,6 @@
     <ul>
         <li *ngFor="let deducible of deducibles">
             <div class="card" style="width: 80rem;">
-                
                 <img [src]="deducible.imagen" class="card-img-top" [alt]="'Imagen de deducible de tipo ' + deducible.Tipo">
                 <div class="card-body">
                     <h1 class="card-title">{{deducible.Tipo}}</h1>
