@@ -20,7 +20,6 @@ export class ReporteComponent implements OnInit{
   constructor(private gastoService:GastoService, private impuestoService:ImpuestosService) {
     this.ObtenerDatosGasto();
     this.ObtenerDatosImpuesto();
-    this.ObtenerDatosUser();
   }
 
   ObtenerDatosGasto(){
@@ -34,13 +33,6 @@ export class ReporteComponent implements OnInit{
     this.impuestoService.obtenerDatos().subscribe(data =>{
       console.log(data);
       this.datos=data;
-    });
-  }
-
-  ObtenerDatosUser(){
-    this.gastoService.obtenerUsers().subscribe(data =>{
-      console.log(data);
-      this.users=data;
     });
   }
 }

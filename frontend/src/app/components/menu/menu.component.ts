@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent {
-  title = 'frontend';
+export class MenuComponent implements OnInit{
+  constructor(private authService:AuthService, private router:Router) {
+    
+  }
+  ngOnInit(): void { }
+
+  loggedIn(){
+    return this.authService.loggedIn();
+  }
 }

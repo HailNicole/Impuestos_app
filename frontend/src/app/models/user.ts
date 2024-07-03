@@ -1,17 +1,14 @@
 export class User{
-    public id:number;
-    public name:string;
-    public username:string;
+    public email:string;
+    public password:string;
 
-    constructor(id:number,name:string,username:string){
-        this.id=id;
-        this.name=name;
-        this.username=username;
+    constructor(email:string,password:string){
+        this.email=email;
+        this.password=password;
     }
 }
 
 export interface User{
-    "id": number;
-    "name":string;
-    "username":string;
+    "email":string;
+    "password":string;
 }

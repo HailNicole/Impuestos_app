@@ -1,6 +1,11 @@
 <nav class="menu">
-    <a class="nav-link" routerLink="/informacion" routerLinkActive="activo">Información</a>
+    <div *ngIf="loggedIn(), else elseBlock">
+        <a class="nav-link" routerLink="/informacion" routerLinkActive="activo">Información</a>
+    </div>
+    <ng-template #elseBlock>Content .</ng-template>
     <a class="nav-link" routerLink="/gastos" routerLinkActive="activo">Registro de Facturas</a>
     <a class="nav-link" routerLink="/formulario_IR" routerLinkActive="activo">Impuesto a la Renta</a>
     <a class="nav-link" routerLink="/reporte" routerLinkActive="activo">Reporte</a>
+    <a class="nav-link" routerLink="/login" routerLinkActive="activo">Iniciar Sesion</a>
+    <a class="nav-link" routerLink="/registro" routerLinkActive="activo">Registrarse</a>
 </nav>

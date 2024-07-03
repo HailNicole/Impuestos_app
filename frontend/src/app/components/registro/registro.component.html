@@ -1,0 +1,14 @@
+<div class="container">
+    <form [formGroup]="formulario">
+      <label for="email">Ingresa tu correo</label>
+      <input type="text" id="email" name="email"
+      placeholder="pat@example.com" formControlName="email"  required />
+      <!--@if (email.invalid) {
+        <h5>{{errorMessage()}}</h5>
+        (focusout)="updateErrorMessage()"
+    }-->
+      <label for="password">Ingresa tu contraseña</label>
+      <input type="password" id="password" name="password" formControlName="password" required />
+      <button (click)="Validar()" class="btn btn-primary" type="submit">Registrarse</button>
+    </form>
+</div>
