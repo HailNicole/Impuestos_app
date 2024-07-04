@@ -1,4 +1,5 @@
 export class Impuestos {
+    public user_id:string=""
     public cedula: string="";
     public sueldo: number=0;
     public salud: number=0;
@@ -12,8 +13,9 @@ export class Impuestos {
     public por_excedente: number=0;
     public ir_total: number=0;
 
-    constructor(cedula:string,sueldo:number,salud:number,educacion:number,vestimenta:number,vivienda:number,alimentacion:number,tot_gastos:number,base_imponible:number,
+    constructor(user_id:string,cedula:string,sueldo:number,salud:number,educacion:number,vestimenta:number,vivienda:number,alimentacion:number,tot_gastos:number,base_imponible:number,
         excedente:number,por_excedente:number,ir_total:number){
+        this.user_id=user_id;
         this.cedula=cedula;
         this.sueldo=sueldo;
         this.salud=salud;
@@ -30,6 +32,7 @@ export class Impuestos {
 }
 
 export interface Impuestos{
+    "user_id":string;
     "cedula": string;
     "sueldo":number;
     "salud":number;

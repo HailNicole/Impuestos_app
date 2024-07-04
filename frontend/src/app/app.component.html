@@ -1,9 +1,41 @@
-<div class="container">
-  <form>
-    <div class="form-group">
-      <h1 class="text-center text-primary">Calculadora SRI</h1>
-      <app-menu></app-menu>
-      <router-outlet></router-outlet>
+<h1 class="text-center text-primary">Calculadora SRI</h1>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/informacion" routerLinkActive="activo">Información</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <ng-container *ngIf="authService.loggedIn(), else elseBlock">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/gastos" routerLinkActive="activo">Registro de Facturas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/formulario_IR" routerLinkActive="activo">Impuesto a la Renta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/reporte" routerLinkActive="activo">Reporte</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" (click)="authService.logout()">Cerrar Sesión</a>
+            </li>
+          </ng-container>
+          <ng-template #elseBlock>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="/login" routerLinkActive="activo">Iniciar Sesion</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="/registro" routerLinkActive="activo">Registrarse</a>
+              </li>
+          </ng-template>
+        </ul>
+      </div>
     </div>
-  </form>
+  </div>
+</nav>
+<div class="container p-5">
+  <router-outlet></router-outlet>
 </div>

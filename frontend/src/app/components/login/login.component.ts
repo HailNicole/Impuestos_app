@@ -21,7 +21,6 @@ export class LoginComponent {
     /*merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());*/
-    this.authService.logout();
     this.formulario = this.fb.group({email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.nullValidator]]
     });
@@ -47,10 +46,9 @@ export class LoginComponent {
 
   signIn(){
     let user = new User(this.email,this.password);
-    this.authService.signIn(user).subscribe(response => {
-      console.log(response)
-      localStorage.setItem('token',response.token);
-      this.router.navigate(['/gastos'])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    this.authService.signIn(user).subscribe(res => {
+      localStorage.setItem('token',res.token);
+      this.router.navigate(['/'])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     },error => {
       console.error('Credenciales Inválidas', error);
     });

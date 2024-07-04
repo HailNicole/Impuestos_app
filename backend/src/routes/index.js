@@ -2,7 +2,7 @@ const { Router } = require('express'); // funcion router
 const router = Router();// obejeto de express
 
 const user = require('../models/user'); // modelo del usuario, interaccion con el usuario para ingreso, consulta, etc 
-
+const reporte = require('../models/reporte')
 const jwt = require('jsonwebtoken');
 
 router.get('/', (req, res) => res.send('Hello Word')) //Define las rutas 
@@ -22,7 +22,8 @@ router.post('/login', async(req, res) => {
     const userFind = await user.findOne({email}); // busca por el correo en la base de datos si lo encuentra lo guarda
     if(!userFind) return res.status(401).send("El correo no existe");
     if(userFind.password !== password) return res.status(401).send("La contraseña erronea")
-    const token = jwt.sign({_id: user._id}, 'secretKey');
+    const token = jwt.sign({_id: userFind._id}, 'secretKey', { expiresIn: '1h' });
+    console.log(token);
     return res.status(200).json({token});
 })
 
@@ -54,7 +55,7 @@ router.get('/task',(req, res) =>{
 router.get('/private-task', verifyToken,(req, res) =>{
     res.json([
         {
-            _id:1,//datos publicos que todo el mundo puede ver 
+            _id:1,
             name: 'Task one',
             description:'lorem ipsum',
             date:"2024-11-17T20:39:05.211Z"
@@ -74,6 +75,50 @@ router.get('/private-task', verifyToken,(req, res) =>{
     ])
 })
 
+router.get("/users", async(req, res) => {   
+    try {
+        const usuarios = await user.find(); // Encuentra todos los documentos en la colección
+        res.status(200).json(usuarios); // Devuelve la lista de usuarios en formato JSON
+    } catch (err) {
+        res.status(500).send('Error al obtener los usuarios');
+    }
+});
+
+router.get("/reportes/:user_id" , async(req,res) => {
+    try {
+        const { user_id } = req.params;
+
+        // Construye el filtro para la consulta
+        let filter = {};
+        if (user_id) {
+            filter.user_id = user_id;
+        }
+        const reportes = await reporte.find(filter)
+        res.status(200).json(reportes); // Devuelve la lista de reportes en formato JSON
+    } catch (err) {
+        res.status(500).send('Error al obtener los reportes');
+    }
+});
+
+//registro de reporte
+router.post('/agregar-reporte', async (req, res) => {
+    const newReporte = new reporte (req.body);
+    await newReporte.save();// .save() metodo asincrono toma tiempo para gardarse para poder continuar con otras tareas agregar await y en la funcion async
+    res.status(200);
+})
+
+router.get('/getUserId', getIdByToken, async (req, res) => {
+    try {
+        const userId = req.userId; // Obtiene el ID del usuario desde el token decodificado
+        const usuario = await user.findById(userId); // Encuentra el usuario por su ID en la base de datos
+        if (!usuario) return res.status(404).send('Usuario no encontrado.');
+        const user_id = usuario._id;
+        res.status(200).json({user_id});
+    } catch (err) {
+        res.status(500).send('Error al obtener el usuario.');
+    }
+});
+
 module.exports = router;
 
 //En la funcion la cabecera se la debe definir en el postman dando un valor, en este caso se debe dar el token 
@@ -92,4 +137,20 @@ function verifyToken(req, res, next){
      //console.log(payload)// muestra los datos contenidos en el payload deberia ser el id del usuario
      req.userId = payload._id ;
      next();
+}
+
+function getIdByToken(req, res, next) {
+    const token = req.headers['authorizacion'];
+    if (!token) return res.status(403).send('Token no proporcionado.');
+
+    // La clave secreta debe ser la misma que usaste para firmar el token
+    const secretKey = 'secretKey'; 
+
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) return res.status(401).send('Token inválido.');
+        
+        // Decoded contiene la información decodificada, como el _id del usuario
+        req.userId = decoded._id;
+        next();
+    });
 }

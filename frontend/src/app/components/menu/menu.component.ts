@@ -9,12 +9,6 @@ import { delay } from 'rxjs';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit{
-  constructor(private authService:AuthService, private router:Router) {
-    
-  }
+  constructor(public authService:AuthService, private router:Router) { }
   ngOnInit(): void { }
-
-  loggedIn(){
-    return this.authService.loggedIn();
-  }
 }

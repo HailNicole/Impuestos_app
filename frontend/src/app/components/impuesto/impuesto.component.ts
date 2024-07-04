@@ -1,6 +1,6 @@
 import { Component , OnInit} from '@angular/core';
-import { ImpuestosService } from '../../services/impuestos.service';
 import { Impuestos } from '../../models/impuestos';
+import { TasksService } from '../../services/tasks.service';;
 
 @Component({
   selector: 'app-impuesto',
@@ -10,9 +10,20 @@ import { Impuestos } from '../../models/impuestos';
 export class ImpuestoComponent implements OnInit{
 
   datos:Impuestos[]=[];
+  user_id:string="";
 
-  constructor(private impuestoService:ImpuestosService) { }
-  ngOnInit():void {this.CargarDatos();}
+  constructor(private tasksService: TasksService) { }
+  ngOnInit():void {
+    this.CargarDatos();
+    this.tasksService.getUserId().subscribe(
+      response => {
+        this.user_id = response.user_id; // Asigna el ID del usuario a la propiedad userId
+      },
+      error => {
+        console.error('Error al obtener el ID del usuario:', error);
+      }
+    );
+  }
 
   cedula:string='0';
   sa:number=0;
@@ -32,9 +43,9 @@ export class ImpuestoComponent implements OnInit{
   flag=false;
 
   CargarDatos(){
-    this.impuestoService.obtenerDatos().subscribe(data =>{
-      this.datos=data;
-      console.log(data);
+    this.tasksService.getReportesById(this.user_id).subscribe(res =>{
+      this.datos=res;
+      console.log(res);
     });
   }
 
@@ -62,12 +73,12 @@ export class ImpuestoComponent implements OnInit{
     return redondeo;
   }
 
-  calcular_porcentaje_excedente() {
+  calcular_porcentaje_excedente():number {
     this.porcentaje_excedente = this.calcular_excedente() * this.calcular_fraccion_basica().ve;
     return this.porcentaje_excedente;
   }
 
-  calcular_ir() {
+  calcular_ir():number {
     this.ir = this.calcular_fraccion_basica().impuesto_fraccion_basica + this.calcular_porcentaje_excedente();
     return this.ir;
   }
@@ -144,11 +155,10 @@ export class ImpuestoComponent implements OnInit{
       porcentaje_excedente:this.calcular_porcentaje_excedente(),
       ir:this.calcular_ir()
     }
-    this.guardarResultado();
   }
 
     GuardarDatos(datos:Impuestos){
-      this.impuestoService.agregarDato(datos).subscribe(response => {
+      this.tasksService.CrearReporte(datos).subscribe(response => {
         console.log('Datos guardados con éxito', response);
       }, error => {
         console.error('Error al guardar los datos', error);
@@ -156,7 +166,7 @@ export class ImpuestoComponent implements OnInit{
     }
 
     Enviar(){
-      let nuevoDato = new Impuestos(this.cedula,this.sa,this.salud,this.educacion,this.vestimenta,
+      let nuevoDato = new Impuestos(this.user_id,this.cedula,this.sa,this.salud,this.educacion,this.vestimenta,
       this.vivienda,this.alimentacion,this.calcular_gasto(),this.calcular_base_imponible(),this.calcular_excedente(),this.calcular_porcentaje_excedente(),this.calcular_ir());
       this.GuardarDatos(nuevoDato);
     }

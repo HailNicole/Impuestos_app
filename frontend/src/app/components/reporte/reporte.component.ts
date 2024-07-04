@@ -1,9 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { GastoService } from '../../services/gasto.service';
-import { Gasto } from '../../models/gasto';
-import { User } from '../../models/user';
-import { ImpuestosService } from '../../services/impuestos.service';
+import { TasksService } from '../../services/tasks.service';
 import { Impuestos } from '../../models/impuestos';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reporte',
@@ -13,26 +11,29 @@ import { Impuestos } from '../../models/impuestos';
 export class ReporteComponent implements OnInit{
   ngOnInit(): void { }
 
-  gastos:Gasto[]=[];
   datos:Impuestos[]=[];
-  users:User[]=[];
+  user_id:string="";
 
-  constructor(private gastoService:GastoService, private impuestoService:ImpuestosService) {
-    this.ObtenerDatosGasto();
-    this.ObtenerDatosImpuesto();
+  constructor(private tasksService: TasksService,private authService:AuthService) {
+    this.getUserId();
   }
 
-  ObtenerDatosGasto(){
-    this.gastoService.obtenerDatos().subscribe(data =>{
-      console.log(data);
-      this.gastos=data;
-    });
-  }
-
-  ObtenerDatosImpuesto(){
-    this.impuestoService.obtenerDatos().subscribe(data =>{
-      console.log(data);
+  ObtenerDatosImpuesto(id_u:string){
+    this.tasksService.getReportesById(id_u).subscribe(data =>{
       this.datos=data;
     });
   }
+
+  getUserId(){
+    this.tasksService.getUserId().subscribe(
+      response => {
+        this.user_id = response.user_id; // Asigna el ID del usuario a la propiedad userId
+        this.ObtenerDatosImpuesto(this.user_id);
+      },
+      error => {
+        console.error('Error al obtener el ID del usuario:', error);
+      }
+    );
+  }
+
 }

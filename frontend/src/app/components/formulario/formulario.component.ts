@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GastoService } from '../../services/gasto.service';
 import { Gasto } from '../../models/gasto';
 import { NgForm } from '@angular/forms';
 
@@ -12,9 +11,9 @@ import { NgForm } from '@angular/forms';
 export class FormularioComponent implements OnInit{
   gastos:Gasto[]=[];
 
-  constructor(private gastoService:GastoService) { }
+  constructor() { }
   ngOnInit():void {
-    this.CargarDatos();
+    //this.CargarDatos();
   }
 
   id:number=0;
@@ -22,7 +21,7 @@ export class FormularioComponent implements OnInit{
   valor:number=0.0;
   gasto:string='Ninguno';
   resultado:string='';
-
+ /*
   CargarDatos(){
     this.gastoService.obtenerDatos().subscribe(data =>{
       this.gastos=data;
@@ -41,11 +40,11 @@ export class FormularioComponent implements OnInit{
         // Manejar errores aquí si es necesario
       });
   }
-
+*/
   Enviar(){
-    let valor_array: Float32Array = new Float32Array([this.valor]);
+   /* let valor_array: Float32Array = new Float32Array([this.valor]);
     let nuevoGasto = new Gasto(this.gastos.length+1, this.gasto, this.ruc, this.valor);
     this.gastos.push(nuevoGasto);
-    this.GuardarDatos(nuevoGasto);
+    this.GuardarDatos(nuevoGasto);*/
   }
 }
