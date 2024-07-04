@@ -9,7 +9,7 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <ng-container *ngIf="authService.loggedIn(), else elseBlock">
+          <ng-container *ngIf="Autenticacion(), else elseBlock">
             <li class="nav-item">
               <a class="nav-link" routerLink="/gastos" routerLinkActive="activo">Registro de Facturas</a>
             </li>

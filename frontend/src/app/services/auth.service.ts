@@ -23,13 +23,23 @@ export class AuthService {
     return !!localStorage.getItem('token'); //Si el token existe retorna True
   }
 
-  //obtiene el token del local storage
-  getToken(){
-    return localStorage.getItem('token');
+  setToken(token: string) {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('token', token);
+    }
   }
 
-  logout(){
-    localStorage.removeItem('token')
-    this.router.navigate(['/login'])
+  getToken() {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
+  }
+
+  logout() {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('token');
+    }
+    this.router.navigate(['/login']);
   }
 }

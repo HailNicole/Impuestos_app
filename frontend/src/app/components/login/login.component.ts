@@ -48,7 +48,8 @@ export class LoginComponent {
     let user = new User(this.email,this.password);
     this.authService.signIn(user).subscribe(res => {
       localStorage.setItem('token',res.token);
-      this.router.navigate(['/'])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+      this.authService.setToken(res.token)
+      this.router.navigate(['/'])                                                                                                                            
     },error => {
       console.error('Credenciales Inválidas', error);
     });
