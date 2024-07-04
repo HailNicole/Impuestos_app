@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +6,6 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor(public authService:AuthService){}
+  constructor(){}
   title = 'frontend';
-  Autenticacion(): boolean {
-    return !!this.authService.getToken()
-  }
 }
