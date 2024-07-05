@@ -41,9 +41,8 @@ export class LoginComponent {
   signIn(){
     let user = new User(this.email,this.password);
     this.authService.signIn(user).subscribe(res => {
-      localStorage.setItem('token',res.token);
       this.authService.setToken(res.token)
-      this.router.navigate(['/'])                                                                                                                            
+      this.router.navigate(['/'])                                                                                                                     
     },error => {
       if (error.error && error.error.message) {
         console.error('Error de autenticación:', error.error.message);

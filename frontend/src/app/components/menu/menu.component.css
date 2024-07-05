@@ -24,3 +24,8 @@
 .activo a {
     color: green;
 }
+
+.container-nav{
+    padding: 10px;
+    margin: auto;
+}
