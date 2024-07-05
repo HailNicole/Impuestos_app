@@ -9,13 +9,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './reporte.component.css'
 })
 export class ReporteComponent implements OnInit{
-  ngOnInit(): void { }
+  ngOnInit(): void {this.getUserId(); }
 
   datos:Impuestos[]=[];
   user_id:string="";
 
   constructor(private tasksService: TasksService,private authService:AuthService) {
-    this.getUserId();
+    
   }
 
   ObtenerDatosImpuesto(id_u:string){
@@ -35,5 +35,4 @@ export class ReporteComponent implements OnInit{
       }
     );
   }
-
 }

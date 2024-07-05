@@ -17,7 +17,6 @@ export class ImpuestoComponent implements OnInit{
     this.tasksService.getUserId().subscribe(
       response => {
         this.user_id = response.user_id;
-        this.CargarDatos(this.user_id)
       },
       error => {
         console.error('Error al obtener el ID del usuario:', error);
@@ -41,13 +40,6 @@ export class ImpuestoComponent implements OnInit{
   porcentaje_excedente:number=0;
   ir:number=0;
   flag=false;
-
-  CargarDatos(id:string){
-    this.tasksService.getReportesById(this.user_id).subscribe(res =>{
-      this.datos=res;
-      console.log(res);
-    });
-  }
 
   validar_ingresos(){
     if(this.alimentacion>3809.65 || this.vivienda>3809.65 || this.educacion>3809.65 || this.vestimenta>3809.65 || this.salud>15232.60){
@@ -160,6 +152,7 @@ export class ImpuestoComponent implements OnInit{
     GuardarDatos(datos:Impuestos){
       this.tasksService.CrearReporte(datos).subscribe(response => {
         console.log('Datos guardados con éxito', response);
+        alert('Datos Guardados');
       }, error => {
         console.error('Error al guardar los datos', error);
       });

@@ -1,14 +1,33 @@
 <div class="container">
+  <div class="container-form">
+    <h1>Iniciar Sesión</h1>
     <form [formGroup]="formulario">
-      <label for="email">Ingresa tu correo</label>
-      <input type="text" id="email" name="email"
-      placeholder="pat@example.com" formControlName="email"  required />
-      <!--@if (email.invalid) {
-        <h5>{{errorMessage()}}</h5>
-        (focusout)="updateErrorMessage()"
-    }-->
-      <label for="password">Ingresa tu contraseña</label>
-      <input type="password" id="password" name="password" formControlName="password" required />
-      <button (click)="Validar()" class="btn btn-primary" type="submit">Iniciar Sesion</button>
+      <div class="container-item">
+        <div class="items-form-content">
+          <div class="item-form">
+             <div class="labels-class">
+              <label class="label-cont" for="email">Ingresa tu correo</label>
+            </div>
+            <div class="labels-class">
+              <input type="email" id="email" name="email"
+              placeholder="pat@example.com" [formControl]="email_valid" 
+              (change)="updateErrorMessage()" required />
+            </div>
+            <div class="item-form">
+              <div class="labels-class">
+                <label class="label-cont" for="password">Ingresa tu contraseña</label>
+              </div>
+              <div class="labels-class">
+                <input type="password" id="password" name="password" formControlName="password" required />
+              </div>
+            </div>
+            <div class="item-form">
+              <button (click)="Validar()" class="btn btn-primary" type="submit">Iniciar Sesion</button>
+            </div>
+            <div *ngIf="errorMessage" class="error-message"><h5>{{ errorMessage() }}</h5></div>
+          </div>
+        </div>
+      </div>
     </form>
+  </div>
 </div>

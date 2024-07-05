@@ -21,8 +21,8 @@ import { AuthGuard } from './auth.guard';
 const rutas: Routes = [
   { path: 'informacion', component: InformacionComponent },
   { path: 'gastos', component: FormularioComponent },
-  { path: 'formulario_IR', component: ImpuestoComponent },
-  { path: 'reporte', component: ReporteComponent},
+  { path: 'formulario_IR', component: ImpuestoComponent, canActivate:[AuthGuard]},
+  { path: 'reporte', component: ReporteComponent, canActivate:[AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'registro', component: RegistroComponent}
   ];

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,22 @@ export class AuthService {
     return this.http.post<any>(this.URL + '/register',user);
   }
 
-  signIn(user:{email:string; password:string;}){
-    return this.http.post<any>(this.URL + '/login',user);
+  signIn(user: any): Observable<any> {
+    return this.http.post<any>(`${this.URL}/login`, user).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );
   }
 
   //verifica si el token existe
   loggedIn(){
-    return !!localStorage.getItem('token'); //Si el token existe retorna True
+    if(typeof localStorage !== 'undefined'){
+      return !!localStorage.getItem('token'); //Si el token existe retorna True
+    }else{
+      return false
+    }
+     
   }
 
   setToken(token: string) {

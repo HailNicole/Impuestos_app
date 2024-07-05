@@ -12,3 +12,17 @@ img{
 li{
     list-style: none;
 }
+
+.lista-card{
+    text-align: center;
+}
+
+.card{
+    margin:auto;
+    text-align: center;
+}
+
+.container-list{
+    padding: 10px;
+    margin: auto;
+}

@@ -20,60 +20,18 @@ router.post('/register', async (req, res) => {
 router.post('/login', async(req, res) => {
     const {email, password} = req.body; //recibe el email y la contraseña
     const userFind = await user.findOne({email}); // busca por el correo en la base de datos si lo encuentra lo guarda
-    if(!userFind) return res.status(401).send("El correo no existe");
-    if(userFind.password !== password) return res.status(401).send("La contraseña erronea")
+    if (!userFind) {
+        return res.status(401).json({ message: "El correo no existe" });
+    }
+
+    if (userFind.password !== password) {
+        return res.status(401).json({ message: "La contraseña es incorrecta" });
+    }
+    
     const token = jwt.sign({_id: userFind._id}, 'secretKey', { expiresIn: '1h' });
-    console.log(token);
     return res.status(200).json({token});
 })
 
-//respuesta al servidor con arreglo de tareas
-router.get('/task',(req, res) =>{
-    res.json([
-        {
-            _id:1,//datos publicos que todo el mundo puede ver 
-            name: 'Task one',
-            description:'lorem ipsum',
-            date:"2024-11-17T20:39:05.211Z"
-        },
-        {
-            _id:2,
-            name: 'Task two',
-            description:'lorem ipsum',
-            date:"2024-11-17T20:39:05.211Z"
-        },
-        {
-            _id:3,
-            name: 'Task three',
-            description:'lorem ipsum',
-            date:"2024-11-17T20:39:05.211Z"
-        }
-    ])
-})
-
-//Se ejecuta primero la ruta a continuación se ejecuta la funcion 
-router.get('/private-task', verifyToken,(req, res) =>{
-    res.json([
-        {
-            _id:1,
-            name: 'Task one',
-            description:'lorem ipsum',
-            date:"2024-11-17T20:39:05.211Z"
-        },
-        {
-            _id:2,
-            name: 'Task two',
-            description:'lorem ipsum',
-            date:"2024-11-17T20:39:05.211Z"
-        },
-        {
-            _id:3,
-            name: 'Task three',
-            description:'lorem ipsum',
-            date:"2024-11-17T20:39:05.211Z"
-        }
-    ])
-})
 
 router.get("/users", async(req, res) => {   
     try {
@@ -124,13 +82,13 @@ module.exports = router;
 //En la funcion la cabecera se la debe definir en el postman dando un valor, en este caso se debe dar el token 
 function verifyToken(req, res, next){
     if(!req.headers.authorizacion){
-        return res.status(401).send('Unthorize Request');
+        return res.status(401).send('Unauthorized Request');
     }
     //se coloca por defecto la palabra bearer espacio y el token obtenido
     //dividir el string recibido 
     const token = req.headers.authorizacion.split(' ')[1]// crea un arreglo ['Bearer', 'token']
      if (token == 'null'){
-        return res.status(401).send('Unthorize Request');
+        return res.status(401).send('Unauthorized Request');
      }
 
      const payload = jwt.verify(token, 'secretKey') //Contenido del token

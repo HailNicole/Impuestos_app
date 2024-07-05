@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Impuestos } from '../models/impuestos';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,13 @@ export class TasksService {
     return this.http.get<any>(this.URL + '/reportes/' + user_id);
   }
 
-  getUserId(){
-    return this.http.get<any>(this.URL+'/getUserId');
+  
+  getUserId(): Observable<any> {
+    return this.http.get<any>(this.URL + '/getUserId').pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al obtener el ID del usuario:', error.message);
+        return throwError(() => new Error('Error al obtener el ID del usuario'));
+      })
+    );
   }
 }
