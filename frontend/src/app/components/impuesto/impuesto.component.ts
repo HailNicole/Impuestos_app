@@ -14,10 +14,10 @@ export class ImpuestoComponent implements OnInit{
 
   constructor(private tasksService: TasksService) { }
   ngOnInit():void {
-    this.CargarDatos();
     this.tasksService.getUserId().subscribe(
       response => {
-        this.user_id = response.user_id; // Asigna el ID del usuario a la propiedad userId
+        this.user_id = response.user_id;
+        this.CargarDatos(this.user_id)
       },
       error => {
         console.error('Error al obtener el ID del usuario:', error);
@@ -42,7 +42,7 @@ export class ImpuestoComponent implements OnInit{
   ir:number=0;
   flag=false;
 
-  CargarDatos(){
+  CargarDatos(id:string){
     this.tasksService.getReportesById(this.user_id).subscribe(res =>{
       this.datos=res;
       console.log(res);

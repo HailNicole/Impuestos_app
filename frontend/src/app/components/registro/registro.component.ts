@@ -33,7 +33,9 @@ export class RegistroComponent {
     this.authService.signUp(user).subscribe(response => {
       console.log(response)
       localStorage.setItem('token',response.token);
-      //this.router.navigate(['/private/tasks'])
+      this.authService.setToken(response.token)
+      alert('Usuario Registrado con Éxito')
+      this.router.navigate(['/'])
     },error => {
       console.error('Credenciales Inválidas', error);
     });

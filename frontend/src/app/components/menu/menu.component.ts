@@ -11,4 +11,8 @@ import { delay } from 'rxjs';
 export class MenuComponent implements OnInit{
   constructor(public authService:AuthService, private router:Router) { }
   ngOnInit(): void { }
+
+  Autenticacion(): boolean {
+    return !!this.authService.getToken()
+  }
 }
