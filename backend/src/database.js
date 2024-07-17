@@ -7,13 +7,16 @@ const mongoose = require('mongoose');
 
 module.exports = mongoose;*/
 
-const dbUri = 'mongodb+srv://madelin:aAGjJCDZGC24xuVI@cluster0.saarj2n.mongodb.net/impuestos';
+//const dbUri = 'mongodb+srv://madelin:aAGjJCDZGC24xuVI@cluster0.saarj2n.mongodb.net/impuestos';
 
-mongoose.connect(dbUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
+
+const dbUri = 'mongodb+srv://madelin:aAGjJCDZGC24xuVI@cluster0.saarj2n.mongodb.net/impuestos?retryWrites=true&w=majority';
+
+mongoose.connect(dbUri)
+  .then(() => {
     console.log('Conexión a MongoDB Atlas exitosa');
-}).catch((error) => {
+  })
+  .catch((error) => {
     console.error('Error conectándose a MongoDB Atlas:', error);
-});
+  });
+
