@@ -8,8 +8,8 @@ import { catchError, Observable, throwError } from 'rxjs';
 })
 export class TasksService {
 
-  private URL = 'http://localhost:3000';
-  private user_id = "sss"
+  //private URL = 'http://localhost:3000';
+  private URL = 'http://ec2-34-195-174-9.compute-1.amazonaws.com:3000';
 
   constructor(private http:HttpClient) { }
 
